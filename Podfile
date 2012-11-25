@@ -1,0 +1,5 @@
+platform :ios
+
+pod 'FlurrySDK'
+
+
