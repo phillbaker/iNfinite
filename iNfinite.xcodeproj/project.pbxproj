@@ -25,7 +25,6 @@
 		24317D291662C0DA00D447BF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24317D271662C0DA00D447BF /* InfoPlist.strings */; };
 		24317D2C1662C0DA00D447BF /* iNfiniteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24317D2B1662C0DA00D447BF /* iNfiniteTests.m */; };
 		24317D401662C79200D447BF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 24317D3F1662C79200D447BF /* Podfile */; };
-		24317D441662C86800D447BF /* AsyncImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24317D431662C86800D447BF /* AsyncImageViewController.m */; };
 		24317D60166305F800D447BF /* InfiniteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24317D5F166305F800D447BF /* InfiniteView.m */; };
 		24317D631663D1D900D447BF /* SimpleAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24317D621663D1D900D447BF /* SimpleAsyncImageView.m */; };
 /* End PBXBuildFile section */
@@ -64,8 +63,6 @@
 		24317D2A1662C0DA00D447BF /* iNfiniteTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iNfiniteTests.h; sourceTree = "<group>"; };
 		24317D2B1662C0DA00D447BF /* iNfiniteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iNfiniteTests.m; sourceTree = "<group>"; };
 		24317D3F1662C79200D447BF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
-		24317D421662C86800D447BF /* AsyncImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageViewController.h; sourceTree = "<group>"; };
-		24317D431662C86800D447BF /* AsyncImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageViewController.m; sourceTree = "<group>"; };
 		24317D5E166305F800D447BF /* InfiniteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfiniteView.h; sourceTree = "<group>"; };
 		24317D5F166305F800D447BF /* InfiniteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfiniteView.m; sourceTree = "<group>"; };
 		24317D611663D1D900D447BF /* SimpleAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncImageView.h; sourceTree = "<group>"; };
@@ -187,8 +184,6 @@
 			children = (
 				24317D151662C0DA00D447BF /* MainViewController.h */,
 				24317D161662C0DA00D447BF /* MainViewController.m */,
-				24317D421662C86800D447BF /* AsyncImageViewController.h */,
-				24317D431662C86800D447BF /* AsyncImageViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -349,7 +344,6 @@
 				24317D071662C0DA00D447BF /* main.m in Sources */,
 				24317D0B1662C0DA00D447BF /* AppDelegate.m in Sources */,
 				24317D171662C0DA00D447BF /* MainViewController.m in Sources */,
-				24317D441662C86800D447BF /* AsyncImageViewController.m in Sources */,
 				24317D60166305F800D447BF /* InfiniteView.m in Sources */,
 				24317D631663D1D900D447BF /* SimpleAsyncImageView.m in Sources */,
 			);

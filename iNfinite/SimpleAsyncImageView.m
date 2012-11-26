@@ -15,14 +15,6 @@
 @synthesize download = _download;
 @synthesize connection = _connection;
 
-//- (id)initWithFrame:(CGRect)frame {
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        // Initialization code
-//    }
-//    return self;
-//}
-
 - (void)startDownloadWithURL:(NSURL*)url onSuccess:(void (^)(UIImage *image))success {
     self.download = [NSMutableData data];
     NSURLRequest *request = [NSURLRequest requestWithURL:url
@@ -31,7 +23,11 @@
 
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request
                                                             delegate:self
-                                                    startImmediately:YES];
+                                                    startImmediately:NO];
+
+    [conn scheduleInRunLoop:[NSRunLoop currentRunLoop]
+                    forMode:NSRunLoopCommonModes];
+    [conn start];
 
     if(!conn) {
         NSLog(@"download - failed");
@@ -51,8 +47,6 @@
 #pragma mark -
 #pragma mark NSURLConnectionDelegate
 #pragma mark -
-
-//-(NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse {
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
      NSLog(@"received response: %@", response);
@@ -76,26 +70,9 @@
     UIImage *image = [[UIImage alloc] initWithData:self.download];
     _onSuccess(image);
     
-    // Use the image
-//    if (image.size.width != kAppIconSize || image.size.height != kAppIconSize) {
-//        CGSize itemSize = CGSizeMake(kAppIconSize, kAppIconSize);
-//        UIGraphicsBeginImageContext(itemSize);
-//        CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
-//        [image drawInRect:imageRect];
-//        self.appRecord.appIcon = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-//    }
-//    else {
-//        self.appRecord.appIcon = image;
-//    }
-    
-    
     // Clean up
     self.download = nil;
     self.connection = nil;
-    
-    // call our delegate and tell it that our icon is ready for display
-//    [delegate appImageDidLoad:self.indexPathInTableView];
 }
 
 

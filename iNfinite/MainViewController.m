@@ -71,6 +71,7 @@
     return YES;
 }
 
+// TODO test this for a memory leak on downloads of images that get scrolled by, I think we're okay as ARC will clean up when we delete the reference to the view here, but need to check
 - (UIView *)infiniteView:(InfiniteView*)infiniteView viewForIndex:(NSUInteger)index {
     UIView *view = [[UIView alloc] initWithFrame:[scrollView bounds]];
     
@@ -89,32 +90,15 @@
                                                blue:((float)(hex & 0xFF))/255.f
                                               alpha:1.f]];
     
+    // Start the NSURLconnection via the simpleasyncimageview on the main thread, but it runs on a different runloop
     SimpleAsyncImageView *imageView = [[SimpleAsyncImageView alloc] initWithFrame:CGRectMake(100, 400, 400, 400)];
-    [imageView startDownloadWithURL:[NSURL URLWithString:@"http://www.google.com/images/srpr/logo3w.png"]
+    [imageView startDownloadWithURL:[NSURL URLWithString:@"http://randomimage.setgetgo.com/get.php?height=400&width=400"]
                           onSuccess:^(UIImage *image) {
                                   imageView.image = image;
                                   NSLog(@"on main queue!");
                                   [view addSubview:imageView];
                               }
                           ];
-    //async:
-    // http://stackoverflow.com/a/11728134
-//    dispatch_queue_t queue = dispatch_queue_create("com.phillbaker.infinte", NULL);
-//    dispatch_async(queue, ^{
-//        // Random png images: http://randomimage.setgetgo.com/get.php?key=&height=400&width=400&type=
-//        // http://randomimage.setgetgo.com/get.php?height=400&width=400
-//        [imageView startDownloadWithURL:[NSURL URLWithString:@"http://www.google.com/images/srpr/logo3w.png"]
-//            onSuccess:^(UIImage *image) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    //main thread
-//                    imageView.image = image;
-//                    NSLog(@"on main queue!");
-//                    [label addSubview:imageView];
-//                });
-//            }];
-//
-//        
-//    });
     
     return view;
 }

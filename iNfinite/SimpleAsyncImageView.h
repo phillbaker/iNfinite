@@ -8,14 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-//@class SimpleAsyncImageView;
-//
-//@protocol SimpleAsyncImageViewDelegate <NSObject>
-//
-//- (void)imageDidLoad;
-//
-//@end
-
 @interface SimpleAsyncImageView : UIImageView <NSURLConnectionDelegate>
 
 @property (nonatomic, retain) NSMutableData *download;
