@@ -27,6 +27,8 @@
 		24317D401662C79200D447BF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 24317D3F1662C79200D447BF /* Podfile */; };
 		24317D60166305F800D447BF /* InfiniteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24317D5F166305F800D447BF /* InfiniteView.m */; };
 		24317D631663D1D900D447BF /* SimpleAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24317D621663D1D900D447BF /* SimpleAsyncImageView.m */; };
+		24F7E31716641DA300872CCD /* simple-app-icons-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F7E31616641DA300872CCD /* simple-app-icons-small.png */; };
+		24F7E31916641DA800872CCD /* simple-app-icons-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F7E31816641DA800872CCD /* simple-app-icons-big.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		24317D5F166305F800D447BF /* InfiniteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfiniteView.m; sourceTree = "<group>"; };
 		24317D611663D1D900D447BF /* SimpleAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncImageView.h; sourceTree = "<group>"; };
 		24317D621663D1D900D447BF /* SimpleAsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAsyncImageView.m; sourceTree = "<group>"; };
+		24F7E31616641DA300872CCD /* simple-app-icons-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simple-app-icons-small.png"; sourceTree = "<group>"; };
+		24F7E31816641DA800872CCD /* simple-app-icons-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simple-app-icons-big.png"; sourceTree = "<group>"; };
 		880ED77F52594FB0B3B48B4E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		937FA782D316470AA53B97B7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,6 +103,8 @@
 		24317CEB1662C0D900D447BF = {
 			isa = PBXGroup;
 			children = (
+				24F7E31816641DA800872CCD /* simple-app-icons-big.png */,
+				24F7E31616641DA300872CCD /* simple-app-icons-small.png */,
 				24317D001662C0DA00D447BF /* App */,
 				24317D011662C0DA00D447BF /* Config */,
 				24317D5D166305C400D447BF /* Library */,
@@ -293,6 +299,8 @@
 				24317D111662C0DA00D447BF /* Default-568h@2x.png in Resources */,
 				24317D141662C0DA00D447BF /* MainStoryboard.storyboard in Resources */,
 				24317D401662C79200D447BF /* Podfile in Resources */,
+				24F7E31716641DA300872CCD /* simple-app-icons-small.png in Resources */,
+				24F7E31916641DA800872CCD /* simple-app-icons-big.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +425,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -438,7 +446,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -450,11 +458,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 880ED77F52594FB0B3B48B4E /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iNfinite/iNfinite-Prefix.pch";
 				INFOPLIST_FILE = "iNfinite/iNfinite-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -463,11 +473,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 880ED77F52594FB0B3B48B4E /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iNfinite/iNfinite-Prefix.pch";
 				INFOPLIST_FILE = "iNfinite/iNfinite-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
