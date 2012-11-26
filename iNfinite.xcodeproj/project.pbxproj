@@ -27,6 +27,7 @@
 		24317D401662C79200D447BF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 24317D3F1662C79200D447BF /* Podfile */; };
 		24317D441662C86800D447BF /* AsyncImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24317D431662C86800D447BF /* AsyncImageViewController.m */; };
 		24317D60166305F800D447BF /* InfiniteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24317D5F166305F800D447BF /* InfiniteView.m */; };
+		24317D631663D1D900D447BF /* SimpleAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24317D621663D1D900D447BF /* SimpleAsyncImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		24317D431662C86800D447BF /* AsyncImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageViewController.m; sourceTree = "<group>"; };
 		24317D5E166305F800D447BF /* InfiniteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfiniteView.h; sourceTree = "<group>"; };
 		24317D5F166305F800D447BF /* InfiniteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfiniteView.m; sourceTree = "<group>"; };
+		24317D611663D1D900D447BF /* SimpleAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAsyncImageView.h; sourceTree = "<group>"; };
+		24317D621663D1D900D447BF /* SimpleAsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAsyncImageView.m; sourceTree = "<group>"; };
 		880ED77F52594FB0B3B48B4E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		937FA782D316470AA53B97B7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -210,6 +213,8 @@
 			children = (
 				24317D5E166305F800D447BF /* InfiniteView.h */,
 				24317D5F166305F800D447BF /* InfiniteView.m */,
+				24317D611663D1D900D447BF /* SimpleAsyncImageView.h */,
+				24317D621663D1D900D447BF /* SimpleAsyncImageView.m */,
 			);
 			name = Library;
 			path = iNfinite;
@@ -346,6 +351,7 @@
 				24317D171662C0DA00D447BF /* MainViewController.m in Sources */,
 				24317D441662C86800D447BF /* AsyncImageViewController.m in Sources */,
 				24317D60166305F800D447BF /* InfiniteView.m in Sources */,
+				24317D631663D1D900D447BF /* SimpleAsyncImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

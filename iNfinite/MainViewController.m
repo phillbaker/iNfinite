@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 phillbaker. All rights reserved.
 //
 
-#import "MainViewController.h"
 #include <stdlib.h>
+
+#import "MainViewController.h"
+#import "SimpleAsyncImageView.h"
 
 @interface MainViewController ()
 
@@ -30,15 +32,7 @@
     //  * assume each view takes a standard height, calculate which view controller we're going to show based on the position we're currently at in the scroll view
     //  * async query  a datasource similar to a UITableView which provides basic info: index and viewcontroller (and hence the view to find the actual height/etc.)
     //  * tell the view controller to load itself
-    
-    //async:
-//    dispatch_queue_t queue = dispatch_queue_create("com.yourdomain.yourappname", NULL);
-//    dispatch_async(queue, ^{
-//        //code to executed in the background
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            //code to be executed on the main thread when background task is finished
-//        });
-//    });
+
     
     scrollView.dataSource = self;
     scrollView.infiniteDelegate = self;
@@ -77,19 +71,52 @@
     return YES;
 }
 
-- (UIView *)infiniteView:(InfiniteView*)view viewForIndex:(NSUInteger)index {
-    CGRect frame = [scrollView bounds];
+- (UIView *)infiniteView:(InfiniteView*)infiniteView viewForIndex:(NSUInteger)index {
+    UIView *view = [[UIView alloc] initWithFrame:[scrollView bounds]];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    UILabel *label = [[UILabel alloc] init];
     [label setText:[NSString stringWithFormat:@"Test %d", index]];
     [label setTextAlignment:UITextAlignmentCenter];
+    [label sizeToFit];
+    CGRect frame = label.frame;
+    frame.origin.x = [scrollView bounds].size.width/2 - frame.size.width/2;
+    label.frame = frame;
+    [view addSubview:label];
     
     NSUInteger hex = ((index+1) * 0x0f0f0f + (arc4random() % 0xfff)) % 0xFFFFFF;
-    [label setBackgroundColor:[UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16))/255.f
+    [view setBackgroundColor:[UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16))/255.f
                                               green:((float)((hex & 0xFF00) >> 8))/255.f
                                                blue:((float)(hex & 0xFF))/255.f
                                               alpha:1.f]];
-    return label;
+    
+    SimpleAsyncImageView *imageView = [[SimpleAsyncImageView alloc] initWithFrame:CGRectMake(100, 400, 400, 400)];
+    [imageView startDownloadWithURL:[NSURL URLWithString:@"http://www.google.com/images/srpr/logo3w.png"]
+                          onSuccess:^(UIImage *image) {
+                                  imageView.image = image;
+                                  NSLog(@"on main queue!");
+                                  [view addSubview:imageView];
+                              }
+                          ];
+    //async:
+    // http://stackoverflow.com/a/11728134
+//    dispatch_queue_t queue = dispatch_queue_create("com.phillbaker.infinte", NULL);
+//    dispatch_async(queue, ^{
+//        // Random png images: http://randomimage.setgetgo.com/get.php?key=&height=400&width=400&type=
+//        // http://randomimage.setgetgo.com/get.php?height=400&width=400
+//        [imageView startDownloadWithURL:[NSURL URLWithString:@"http://www.google.com/images/srpr/logo3w.png"]
+//            onSuccess:^(UIImage *image) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    //main thread
+//                    imageView.image = image;
+//                    NSLog(@"on main queue!");
+//                    [label addSubview:imageView];
+//                });
+//            }];
+//
+//        
+//    });
+    
+    return view;
 }
 
 //@optional
