@@ -24,7 +24,6 @@
 @synthesize infiniteDelegate = _infiniteDelegate;
 
 - (void)commonInit {
-    NSLog(@"inited");
     _currentIndex = 0;
     
     [self setDelegate:self];
@@ -33,20 +32,17 @@
 
 // when added with storyboard/xib
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    NSLog(@"init with coder");
     self = [super initWithCoder:aDecoder];
     if (self) {
         // Initialization code
 		[self commonInit];
     }
     return self;
-	
 }
 
 - (id)initWithFrame:(CGRect)frame
          dataSource:(id <InfiniteViewDataSource>) dataSource
            delegate:(id <InfiniteViewDelegate>) delegate {
-    NSLog(@"init with frame");
     self = [super initWithFrame:frame];
     if (self) {
         self.dataSource = dataSource;
@@ -81,7 +77,6 @@
         
         _currentView = [self.dataSource infiniteView:self viewForIndex:_currentIndex];
         [self addSubview:_currentView];
-        NSLog(@"setup, index: %d, current view: %@", _currentIndex, _currentView);
         
         NSInteger nextIndex = [self nextIndex];
         if(nextIndex >= 0) {
@@ -126,9 +121,6 @@
 
 - (void)layoutScrollView {
     if([self previousIndex] < 0) {
-        NSLog(@"setting up for beginning");
-        // need to setup different for at beginning, middle and end
-        // for non-circular motion, we want to start at 0, without previous view, so setup is a little funky
         CGRect frame = [_currentView frame];
         frame.origin.x = 0;
         [_currentView setFrame:frame];
@@ -147,33 +139,22 @@
     }
     else {
         // middle
-        NSLog(@"setting up for middle");
-        //    NSInteger count = 0;
-        //    if(_previousView) {
+
         CGRect frame = [_previousView frame];
         frame.origin.x = 0;
         [_previousView setFrame:frame];
-        //        count += 1;
-        //    }
         
         frame = [_currentView frame];
         frame.origin.x = [self frame].size.width;
         [_currentView setFrame:frame];
-        //    count += 1;
-        
-        //    if(_nextView) {
+
         frame = [_nextView frame];
         frame.origin.x = [self frame].size.width * 2;
         [_nextView setFrame:frame];
-        //        count += 1;
-        //    }
         
         [self setContentSize:CGSizeMake([self frame].size.width * 3, [self frame].size.height)];
         [self setContentOffset:CGPointMake([self frame].size.width, 0)];
     }
-    
-
-    
     
     _currentOffset = [self contentOffset];
 }
@@ -197,12 +178,10 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     // if we want to scroll horizontally, look at the x; if we want to scroll vertically, look at the y
-    NSLog(@"%@ vs. %@", NSStringFromCGPoint([self contentOffset]), NSStringFromCGPoint(_currentOffset));
     if ([self contentOffset].x < _currentOffset.x) {
         // scroll up: switch the temp variables to shift up
         NSInteger previousIndex = [self previousIndex];
         if(previousIndex >= 0) {
-            NSLog(@"switching to previous: %d", previousIndex);
             _currentIndex = previousIndex;
             
             [_nextView removeFromSuperview];
@@ -214,13 +193,9 @@
                 _previousView = [self.dataSource infiniteView:self viewForIndex:newIndex];
                 [self addSubview:_previousView];
             }
-//            else {
-//                [_previousView removeFromSuperview];
-//                _previousView = nil;
-//            }
-            
             
             [self layoutScrollView];
+            [self.infiniteDelegate infiniteView:self didScrollToViewAtIndex:_currentIndex];
         }
         else {
             NSLog(@"not switching to previous: %d", previousIndex);
@@ -230,7 +205,6 @@
         // scroll down: switch the temp variables to shift down
         NSInteger nextIndex = [self nextIndex];
         if(nextIndex >= 0) {
-            NSLog(@"switching to next: %d", nextIndex);
             _currentIndex = nextIndex;
             
             [_previousView removeFromSuperview];
@@ -242,30 +216,15 @@
                 _nextView = [self.dataSource infiniteView:self viewForIndex:newIndex];
                 [self addSubview:_nextView];
             }
-//            else {
-//                [_nextView removeFromSuperview];
-//                _nextView = nil;
-//            }
             
             [self layoutScrollView];
+            [self.infiniteDelegate infiniteView:self didScrollToViewAtIndex:_currentIndex];
         }
         else {
             NSLog(@"not switching to next: %d", nextIndex);
         }
     }
-    else {
-        // we're equal in content offset, shouldn't do anything
-        NSLog(@"not switching");
-    }
-}
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
 }
-*/
 
 @end

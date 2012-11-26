@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#include <stdlib.h>
 
 @interface MainViewController ()
 
@@ -41,10 +42,6 @@
     
     scrollView.dataSource = self;
     scrollView.infiniteDelegate = self;
-
-    // set the scrollView.delegate to the uiviewcontroller? (UIviewcontroller must implement UIScrollViewDelegate protocol
-    // or grab the .view from the viewcontroller? (http://stackoverflow.com/a/9520903 )
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -82,13 +79,12 @@
 
 - (UIView *)infiniteView:(InfiniteView*)view viewForIndex:(NSUInteger)index {
     CGRect frame = [scrollView bounds];
-//    NSLog(@"view: %@", NSStringFromCGRect(frame));
+    
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     [label setText:[NSString stringWithFormat:@"Test %d", index]];
     [label setTextAlignment:UITextAlignmentCenter];
     
-    NSUInteger hex = ((index+1) * 0xf0f0f) % 0xFFFFFF;
-//    NSLog(@"color: %f %f %F", ((float)((hex & 0xFF0000) >> 16)), ((float)((hex & 0xFF00) >> 8)), ((float)(hex & 0xFF)));
+    NSUInteger hex = ((index+1) * 0x0f0f0f + (arc4random() % 0xfff)) % 0xFFFFFF;
     [label setBackgroundColor:[UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16))/255.f
                                               green:((float)((hex & 0xFF00) >> 8))/255.f
                                                blue:((float)(hex & 0xFF))/255.f
