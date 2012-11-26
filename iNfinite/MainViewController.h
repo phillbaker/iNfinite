@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InfiniteView.h"
 
-@interface MainViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@interface MainViewController : UIViewController <InfiniteViewDataSource, InfiniteViewDelegate>
+@property (weak, nonatomic) IBOutlet InfiniteView *scrollView;
 
 @end
