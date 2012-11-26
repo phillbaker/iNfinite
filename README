@@ -1,0 +1,9 @@
+iNfinite
+========
+A simple demo app showing the use of a UIScrollView to do infinte scroll through a bunch of UIViews with semi-random background colors and images from Random Image API from Set Get Go (randomimage.setgetgo.com/).
+
+License
+=======
+See LICENSE.
+
+
